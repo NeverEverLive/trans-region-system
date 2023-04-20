@@ -8,16 +8,15 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from starlette.requests import Request
 
-from src.utils import logger
+from src.utils.logger import CustomizeLogger
 from src.exceptions.user import UserException
 from src.views.user import router as user_router
 
 
 def create_app(config_path: Path = Path("src/configs/logging_config.json")) -> FastAPI:
-    logger.CustomizeLogger.make_logger(config_path)
+    CustomizeLogger.make_logger(config_path)
 
     app = FastAPI(title="Prefab project", debug=False)
-    app.logger = logger
     app.secret_key = "BAD_SECRET_KEY"
 
     app.add_middleware(
