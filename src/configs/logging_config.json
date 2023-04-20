@@ -1,0 +1,10 @@
+{
+  "logger": {
+    "path": "./logs/access.log",
+    "level": "info",
+    "rotation": "20 days",
+    "retention": "1 months",
+    "format": "<cyan>{time:YYYY-MM-DD HH:mm:ss}</cyan> | <magenta>{level:<10}</magenta> | {message}"
+
+  }
+}
