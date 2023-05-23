@@ -24,3 +24,113 @@
 2023-04-20 14:57:08 | INFO       | 127.0.0.1:57400 - "GET / HTTP/1.1" 200
 2023-04-20 14:57:36 | INFO       | 127.0.0.1:57410 - "GET / HTTP/1.1" 200
 2023-04-20 14:57:48 | INFO       | 127.0.0.1:57416 - "GET / HTTP/1.1" 200
+2023-05-23 13:37:25 | INFO       | 127.0.0.1:61803 - "GET /user HTTP/1.1" 404
+2023-05-23 13:37:35 | INFO       | 127.0.0.1:61806 - "GET /api HTTP/1.1" 404
+2023-05-23 13:38:08 | INFO       | 127.0.0.1:61810 - "GET /user HTTP/1.1" 404
+2023-05-23 13:38:28 | INFO       | 127.0.0.1:61813 - "GET /user HTTP/1.1" 404
+2023-05-23 13:38:32 | INFO       | 127.0.0.1:61816 - "GET /user HTTP/1.1" 404
+2023-05-23 13:38:42 | INFO       | 127.0.0.1:61817 - "GET /user/ HTTP/1.1" 404
+2023-05-23 13:38:44 | INFO       | 127.0.0.1:61818 - "GET /user HTTP/1.1" 404
+2023-05-23 13:39:02 | INFO       | 127.0.0.1:61821 - "GET /docs HTTP/1.1" 200
+2023-05-23 13:39:02 | INFO       | 127.0.0.1:61821 - "GET /openapi.json HTTP/1.1" 200
+2023-05-23 13:39:22 | INFO       | 127.0.0.1:61830 - "GET /user HTTP/1.1" 307
+2023-05-23 13:39:40 | INFO       | 127.0.0.1:61835 - "GET /user HTTP/1.1" 307
+2023-05-23 13:40:22 | INFO       | 127.0.0.1:61852 - "GET /user HTTP/1.1" 307
+2023-05-23 13:40:33 | INFO       | 127.0.0.1:61860 - "GET /docs HTTP/1.1" 200
+2023-05-23 13:40:34 | INFO       | 127.0.0.1:61860 - "GET /openapi.json HTTP/1.1" 200
+2023-05-23 13:40:37 | WARNING    | [<src.models.user.UserModel object at 0x104f8a0e0>]
+2023-05-23 13:40:37 | INFO       | 127.0.0.1:61860 - "GET /user/ HTTP/1.1" 400
+2023-05-23 13:42:50 | INFO       | 127.0.0.1:61878 - "GET /user/ HTTP/1.1" 400
+2023-05-23 13:43:16 | INFO       | 127.0.0.1:61884 - "GET /user/ HTTP/1.1" 400
+2023-05-23 13:44:15 | INFO       | 127.0.0.1:61899 - "GET /user/ HTTP/1.1" 400
+2023-05-23 13:44:17 | INFO       | 127.0.0.1:61902 - "GET /docs HTTP/1.1" 200
+2023-05-23 13:44:17 | INFO       | 127.0.0.1:61902 - "GET /openapi.json HTTP/1.1" 200
+2023-05-23 13:44:20 | INFO       | 127.0.0.1:61902 - "GET /user/ HTTP/1.1" 400
+2023-05-23 13:46:11 | INFO       | 127.0.0.1:61916 - "GET /user/ HTTP/1.1" 200
+2023-05-23 13:46:54 | INFO       | 127.0.0.1:61932 - "GET /user/ HTTP/1.1" 200
+2023-05-23 13:46:55 | INFO       | 127.0.0.1:61932 - "GET /user/ HTTP/1.1" 200
+2023-05-23 13:49:53 | INFO       | 127.0.0.1:61955 - "GET /docs HTTP/1.1" 200
+2023-05-23 13:49:54 | INFO       | 127.0.0.1:61955 - "GET /openapi.json HTTP/1.1" 200
+2023-05-23 13:50:04 | INFO       | 127.0.0.1:61964 - "GET /docs HTTP/1.1" 200
+2023-05-23 13:50:04 | INFO       | 127.0.0.1:61964 - "GET /openapi.json HTTP/1.1" 200
+2023-05-23 13:50:17 | INFO       | 127.0.0.1:61967 - "GET /user/%7Bid%7D?_id=3fa85f64-5717-4562-b3fc-2c963f66afa6 HTTP/1.1" 200
+2023-05-23 13:50:55 | INFO       | 127.0.0.1:61978 - "GET /user/%7Bid%7D?_id=3fa85f64-5717-4562-b3fc-2c963f66afa6 HTTP/1.1" 200
+2023-05-23 13:50:56 | INFO       | 127.0.0.1:61978 - "GET /user/%7Bid%7D?_id=3fa85f64-5717-4562-b3fc-2c963f66afa6 HTTP/1.1" 200
+2023-05-23 13:51:14 | INFO       | 127.0.0.1:61983 - "GET /user/%7Bid%7D?_id=3fa85f64-5717-4562-b3fc-2c963f66afa6 HTTP/1.1" 200
+2023-05-23 13:52:18 | INFO       | 127.0.0.1:62014 - "GET /docs HTTP/1.1" 200
+2023-05-23 13:52:18 | INFO       | 127.0.0.1:62014 - "GET /openapi.json HTTP/1.1" 200
+2023-05-23 13:52:19 | INFO       | 127.0.0.1:62014 - "GET /docs HTTP/1.1" 200
+2023-05-23 13:52:19 | INFO       | 127.0.0.1:62014 - "GET /openapi.json HTTP/1.1" 200
+2023-05-23 13:52:24 | INFO       | 127.0.0.1:62016 - "GET /user/3fa85f64-5717-4562-b3fc-2c963f66afa6 HTTP/1.1" 400
+2023-05-23 13:53:15 | INFO       | 127.0.0.1:62044 - "GET /user/3fa85f64-5717-4562-b3fc-2c963f66afa6 HTTP/1.1" 400
+2023-05-23 13:53:29 | WARNING    | None
+2023-05-23 13:53:29 | INFO       | 127.0.0.1:62048 - "GET /user/3fa85f64-5717-4562-b3fc-2c963f66afa6 HTTP/1.1" 400
+2023-05-23 13:54:02 | WARNING    | 3fa85f64-5717-4562-b3fc-2c963f66afa6
+2023-05-23 13:54:02 | WARNING    | None
+2023-05-23 13:54:02 | INFO       | 127.0.0.1:62055 - "GET /user/3fa85f64-5717-4562-b3fc-2c963f66afa6 HTTP/1.1" 400
+2023-05-23 13:54:26 | INFO       | 127.0.0.1:62060 - "GET /user/ HTTP/1.1" 200
+2023-05-23 13:54:48 | WARNING    | 3fa85f64-5717-4562-b3fc-2c963f66afa6
+2023-05-23 13:54:48 | WARNING    | SELECT "user".id, "user".email, "user".hash_password, "user".created_on 
+FROM "user" 
+WHERE "user".id = :id_1
+ LIMIT :param_1
+2023-05-23 13:54:48 | WARNING    | None
+2023-05-23 13:54:48 | INFO       | 127.0.0.1:62065 - "GET /user/3fa85f64-5717-4562-b3fc-2c963f66afa6 HTTP/1.1" 400
+2023-05-23 13:56:24 | WARNING    | 3fa85f64-5717-4562-b3fc-2c963f66afa6
+2023-05-23 13:56:24 | WARNING    | SELECT service_user.id, service_user.email, service_user.hash_password, service_user.created_on 
+FROM service_user 
+WHERE service_user.id = :id_1
+ LIMIT :param_1
+2023-05-23 13:56:24 | WARNING    | None
+2023-05-23 13:56:24 | INFO       | 127.0.0.1:62077 - "GET /user/3fa85f64-5717-4562-b3fc-2c963f66afa6 HTTP/1.1" 400
+2023-05-23 13:58:49 | WARNING    | e7232b25-2889-4acf-85cf-d5e7dcc03f3a
+2023-05-23 13:58:49 | WARNING    | SELECT "user".id, "user".email, "user".hash_password, "user".created_on 
+FROM "user" 
+WHERE "user".id = :id_1
+ LIMIT :param_1
+2023-05-23 13:58:49 | WARNING    | <src.models.user.UserModel object at 0x109ce7220>
+2023-05-23 13:58:49 | INFO       | 127.0.0.1:62089 - "GET /user/e7232b25-2889-4acf-85cf-d5e7dcc03f3a HTTP/1.1" 400
+2023-05-23 13:59:17 | WARNING    | e7232b25-2889-4acf-85cf-d5e7dcc03f3a
+2023-05-23 13:59:17 | WARNING    | SELECT "user".id, "user".email, "user".hash_password, "user".created_on 
+FROM "user" 
+WHERE "user".id = :id_1
+ LIMIT :param_1
+2023-05-23 13:59:17 | WARNING    | <src.models.user.UserModel object at 0x108987160>
+2023-05-23 13:59:17 | INFO       | 127.0.0.1:62096 - "GET /user/e7232b25-2889-4acf-85cf-d5e7dcc03f3a HTTP/1.1" 400
+2023-05-23 13:59:19 | WARNING    | e7232b25-2889-4acf-85cf-d5e7dcc03f3a
+2023-05-23 13:59:19 | WARNING    | SELECT "user".id, "user".email, "user".hash_password, "user".created_on 
+FROM "user" 
+WHERE "user".id = :id_1
+ LIMIT :param_1
+2023-05-23 13:59:19 | WARNING    | <src.models.user.UserModel object at 0x1089bcfd0>
+2023-05-23 13:59:19 | INFO       | 127.0.0.1:62099 - "GET /user/e7232b25-2889-4acf-85cf-d5e7dcc03f3a HTTP/1.1" 400
+2023-05-23 13:59:46 | WARNING    | e7232b25-2889-4acf-85cf-d5e7dcc03f3a
+2023-05-23 13:59:46 | WARNING    | SELECT "user".id, "user".email, "user".hash_password, "user".created_on 
+FROM "user" 
+WHERE "user".id = :id_1
+ LIMIT :param_1
+2023-05-23 13:59:46 | WARNING    | <src.models.user.UserModel object at 0x107ce2ec0>
+2023-05-23 13:59:46 | INFO       | 127.0.0.1:62107 - "GET /user/e7232b25-2889-4acf-85cf-d5e7dcc03f3a HTTP/1.1" 200
+2023-05-23 14:07:57 | INFO       | 127.0.0.1:62181 - "GET /docs HTTP/1.1" 200
+2023-05-23 14:07:57 | INFO       | 127.0.0.1:62181 - "GET /openapi.json HTTP/1.1" 200
+2023-05-23 14:08:18 | INFO       | 127.0.0.1:62182 - "POST /user/ HTTP/1.1" 400
+2023-05-23 14:08:41 | INFO       | 127.0.0.1:62195 - "POST /user/ HTTP/1.1" 201
+2023-05-23 14:09:03 | INFO       | 127.0.0.1:62200 - "GET /user/ HTTP/1.1" 200
+2023-05-23 14:09:13 | INFO       | 127.0.0.1:62211 - "GET /user/8be644b6-26e2-4b62-8767-e3226c6528ce HTTP/1.1" 200
+2023-05-23 14:09:31 | INFO       | 127.0.0.1:62221 - "PUT /user/ HTTP/1.1" 400
+2023-05-23 14:10:12 | INFO       | 127.0.0.1:62228 - "PUT /user/ HTTP/1.1" 200
+2023-05-23 14:10:17 | INFO       | 127.0.0.1:62228 - "GET /user/ HTTP/1.1" 200
+2023-05-23 14:10:26 | INFO       | 127.0.0.1:62234 - "DELETE /user/8be644b6-26e2-4b62-8767-e3226c6528ce HTTP/1.1" 400
+2023-05-23 14:10:48 | INFO       | 127.0.0.1:62245 - "DELETE /user/8be644b6-26e2-4b62-8767-e3226c6528ce HTTP/1.1" 404
+2023-05-23 14:10:55 | INFO       | 127.0.0.1:62248 - "POST /user/ HTTP/1.1" 201
+2023-05-23 14:10:59 | INFO       | 127.0.0.1:62248 - "DELETE /user/4322c083-afb4-4dec-9a9a-60a6132da896 HTTP/1.1" 202
+2023-05-23 14:11:10 | INFO       | 127.0.0.1:62252 - "GET /user/ HTTP/1.1" 200
+2023-05-23 14:25:50 | INFO       | 127.0.0.1:62377 - "GET /docs HTTP/1.1" 200
+2023-05-23 14:25:51 | INFO       | 127.0.0.1:62377 - "GET /openapi.json HTTP/1.1" 200
+2023-05-23 14:25:57 | INFO       | 127.0.0.1:62379 - "GET /user/ HTTP/1.1" 200
+2023-05-23 14:28:09 | INFO       | 127.0.0.1:62387 - "GET /user/ HTTP/1.1" 200
+2023-05-23 14:28:54 | INFO       | 127.0.0.1:62397 - "POST /user/ HTTP/1.1" 400
+2023-05-23 14:29:32 | INFO       | 127.0.0.1:62402 - "POST /user/ HTTP/1.1" 201
+2023-05-23 14:30:57 | INFO       | 127.0.0.1:62414 - "POST /user/ HTTP/1.1" 400
+2023-05-23 14:31:45 | INFO       | 127.0.0.1:62424 - "POST /user/ HTTP/1.1" 201
+2023-05-23 14:32:01 | INFO       | 127.0.0.1:62428 - "POST /user/ HTTP/1.1" 201

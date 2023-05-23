@@ -64,7 +64,7 @@ def create_app(config_path: Path = Path("src/configs/logging_config.json")) -> F
 
     app.include_router(
         user_router,
-        prefix="/api",
+        prefix="/user",
         tags=["User"],
     )
 

@@ -5,3 +5,7 @@ class UserException(Exception):
 
 class UserCreateException(UserException):
     pass
+
+
+class UserDeleteException(UserException):
+    pass
