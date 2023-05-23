@@ -19,6 +19,7 @@ class ProjectSchema(BaseModel):
     price: int
     description: str | None
     preview: str | None
+    images: list[str] | None
 
     @classmethod
     def __get_validators__(cls):

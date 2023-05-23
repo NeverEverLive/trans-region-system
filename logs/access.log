@@ -364,3 +364,56 @@ WHERE "user".id = :id_1
 2023-05-23 23:32:08 | INFO       | 127.0.0.1:63761 - "GET /openapi.json HTTP/1.1" 200
 2023-05-23 23:32:16 | INFO       | 127.0.0.1:63763 - "GET /project/preview?path=%2FUsers%2Fnel%2FDocuments%2Fdiplomas%2Ftrans_region_system%2Fimages%2Fimage_2023-05-15_14-18-09.png HTTP/1.1" 200
 2023-05-23 23:37:12 | INFO       | 127.0.0.1:65012 - "GET /project HTTP/1.1" 200
+2023-05-23 23:51:31 | INFO       | 127.0.0.1:65480 - "GET /docs HTTP/1.1" 200
+2023-05-23 23:51:31 | INFO       | 127.0.0.1:65480 - "GET /openapi.json HTTP/1.1" 200
+2023-05-23 23:52:11 | INFO       | 127.0.0.1:65494 - "GET /city HTTP/1.1" 400
+2023-05-23 23:52:33 | INFO       | 127.0.0.1:65499 - "GET /city HTTP/1.1" 200
+2023-05-23 23:53:27 | INFO       | 127.0.0.1:65510 - "POST /project HTTP/1.1" 400
+2023-05-23 23:54:05 | INFO       | 127.0.0.1:65518 - "POST /project HTTP/1.1" 400
+2023-05-23 23:54:23 | INFO       | 127.0.0.1:65524 - "POST /project HTTP/1.1" 400
+2023-05-23 23:54:51 | INFO       | 127.0.0.1:65530 - "POST /project HTTP/1.1" 400
+2023-05-23 23:58:22 | INFO       | 127.0.0.1:49186 - "POST /project HTTP/1.1" 400
+2023-05-23 23:59:53 | INFO       | 127.0.0.1:49207 - "POST /project HTTP/1.1" 201
+2023-05-24 00:03:27 | INFO       | 127.0.0.1:49242 - "GET /docs HTTP/1.1" 200
+2023-05-24 00:03:28 | INFO       | 127.0.0.1:49242 - "GET /openapi.json HTTP/1.1" 200
+2023-05-24 00:03:34 | INFO       | 127.0.0.1:49244 - "GET /project HTTP/1.1" 200
+2023-05-24 00:04:25 | INFO       | 127.0.0.1:49257 - "GET /docs HTTP/1.1" 200
+2023-05-24 00:04:25 | INFO       | 127.0.0.1:49257 - "GET /openapi.json HTTP/1.1" 200
+2023-05-24 00:04:31 | INFO       | 127.0.0.1:49259 - "GET /project HTTP/1.1" 200
+2023-05-24 00:05:14 | INFO       | 127.0.0.1:49266 - "PUT /project HTTP/1.1" 422
+2023-05-24 00:05:28 | INFO       | 127.0.0.1:49269 - "PUT /project HTTP/1.1" 200
+2023-05-24 00:05:43 | INFO       | 127.0.0.1:49273 - "GET /project HTTP/1.1" 200
+2023-05-24 00:06:21 | INFO       | 127.0.0.1:49286 - "PUT /project HTTP/1.1" 422
+2023-05-24 00:06:27 | INFO       | 127.0.0.1:49289 - "PUT /project HTTP/1.1" 200
+2023-05-24 00:07:16 | INFO       | 127.0.0.1:49298 - "DELETE /project64b3357d-95b6-4044-937f-a746eb7dd44b HTTP/1.1" 400
+2023-05-24 00:07:47 | INFO       | 127.0.0.1:49304 - "DELETE /project64b3357d-95b6-4044-937f-a746eb7dd44b HTTP/1.1" 400
+2023-05-24 00:08:35 | WARNING    | None
+2023-05-24 00:08:35 | INFO       | 127.0.0.1:49320 - "DELETE /project64b3357d-95b6-4044-937f-a746eb7dd44b HTTP/1.1" 400
+2023-05-24 00:09:05 | INFO       | 127.0.0.1:49326 - "GET /project HTTP/1.1" 200
+2023-05-24 00:09:10 | INFO       | 127.0.0.1:49330 - "DELETE /project64b3357d-95b6-4044-937f-a746eb7dd44b HTTP/1.1" 404
+2023-05-24 00:09:29 | WARNING    | <src.models.project.Project object at 0x11327d090>
+2023-05-24 00:09:29 | INFO       | 127.0.0.1:49334 - "DELETE /project248302d9-5e08-427b-a56e-ce72fd64ebde HTTP/1.1" 202
+2023-05-24 00:10:02 | INFO       | 127.0.0.1:49341 - "GET /project HTTP/1.1" 200
+2023-05-24 00:13:26 | INFO       | 127.0.0.1:49373 - "POST /project HTTP/1.1" 422
+2023-05-24 00:14:26 | INFO       | 127.0.0.1:49380 - "POST /project HTTP/1.1" 201
+2023-05-24 00:14:42 | INFO       | 127.0.0.1:49385 - "GET /project HTTP/1.1" 200
+2023-05-24 00:14:49 | INFO       | 127.0.0.1:49388 - "GET /project3a544c08-0825-4dcf-8796-b342ff58eb06 HTTP/1.1" 200
+2023-05-24 00:15:13 | INFO       | 127.0.0.1:49398 - "GET /project3a544c08-0825-4dcf-8796-b342ff58eb06 HTTP/1.1" 200
+2023-05-24 00:15:16 | INFO       | 127.0.0.1:49398 - "GET /project3a544c08-0825-4dcf-8796-b342ff58eb06 HTTP/1.1" 200
+2023-05-24 00:17:58 | INFO       | 127.0.0.1:49423 - "GET /project3a544c08-0825-4dcf-8796-b342ff58eb06 HTTP/1.1" 400
+2023-05-24 00:18:18 | INFO       | 127.0.0.1:49430 - "GET /project3a544c08-0825-4dcf-8796-b342ff58eb06 HTTP/1.1" 400
+2023-05-24 00:18:32 | INFO       | 127.0.0.1:49440 - "GET /project3a544c08-0825-4dcf-8796-b342ff58eb06 HTTP/1.1" 400
+2023-05-24 00:18:33 | INFO       | 127.0.0.1:49443 - "GET /project3a544c08-0825-4dcf-8796-b342ff58eb06 HTTP/1.1" 400
+2023-05-24 00:18:56 | WARNING    | /Users/nel/Documents/diplomas/trans_region_system/images/image_2023-05-14_14-58-00.png
+2023-05-24 00:18:56 | WARNING    | /Users/nel/Documents/diplomas/trans_region_system/images/image_2023-05-16_11-21-14.png
+2023-05-24 00:18:56 | INFO       | 127.0.0.1:49448 - "GET /project3a544c08-0825-4dcf-8796-b342ff58eb06 HTTP/1.1" 400
+2023-05-24 00:19:27 | WARNING    | /Users/nel/Documents/diplomas/trans_region_system/images/image_2023-05-14_14-58-00.png
+2023-05-24 00:19:27 | WARNING    | /Users/nel/Documents/diplomas/trans_region_system/images/image_2023-05-16_11-21-14.png
+2023-05-24 00:19:27 | INFO       | 127.0.0.1:49459 - "GET /project3a544c08-0825-4dcf-8796-b342ff58eb06 HTTP/1.1" 400
+2023-05-24 00:20:09 | WARNING    | /Users/nel/Documents/diplomas/trans_region_system/images/image_2023-05-14_14-58-00.png
+2023-05-24 00:20:09 | WARNING    | /Users/nel/Documents/diplomas/trans_region_system/images/image_2023-05-16_11-21-14.png
+2023-05-24 00:20:09 | INFO       | 127.0.0.1:49468 - "GET /project3a544c08-0825-4dcf-8796-b342ff58eb06 HTTP/1.1" 400
+2023-05-24 00:21:09 | WARNING    | /Users/nel/Documents/diplomas/trans_region_system/images/image_2023-05-14_14-58-00.png
+2023-05-24 00:21:09 | WARNING    | /Users/nel/Documents/diplomas/trans_region_system/images/image_2023-05-16_11-21-14.png
+2023-05-24 00:21:09 | WARNING    | {'id': UUID('3a544c08-0825-4dcf-8796-b342ff58eb06'), 'city_id': UUID('64b3357d-95b6-4044-937f-a746eb7dd44b'), 'name': 'qwe', 'price': 10, 'description': 'qwe', 'preview': None, 'images': ['/Users/nel/Documents/diplomas/trans_region_system/images/image_2023-05-14_14-58-00.png', '/Users/nel/Documents/diplomas/trans_region_system/images/image_2023-05-16_11-21-14.png']}
+2023-05-24 00:21:09 | INFO       | 127.0.0.1:49482 - "GET /project3a544c08-0825-4dcf-8796-b342ff58eb06 HTTP/1.1" 200
