@@ -10,7 +10,10 @@ from starlette.requests import Request
 
 from src.utils.logger import CustomizeLogger
 from src.exceptions.user import UserException
+from src.exceptions.authentication import AuthenticationException
+from src.exceptions.city import CityException
 from src.views.user import router as user_router
+from src.views.city import router as city_router
 
 
 def create_app(config_path: Path = Path("src/configs/logging_config.json")) -> FastAPI:
@@ -35,7 +38,21 @@ def create_app(config_path: Path = Path("src/configs/logging_config.json")) -> F
         )
 
     @app.exception_handler(UserException)
-    async def video_exception_handler(request: Request, exc: UserException):
+    async def user_exception_handler(request: Request, exc: UserException):
+        return JSONResponse(
+            status_code=exc.status_code,
+            content={"success": False, "message": exc.message},
+        )
+    
+    @app.exception_handler(CityException)
+    async def city_exception_handler(request: Request, exc: CityException):
+        return JSONResponse(
+            status_code=exc.status_code,
+            content={"success": False, "message": exc.message},
+        )
+    
+    @app.exception_handler(AuthenticationException)
+    async def authentication_exception_handler(request: Request, exc: AuthenticationException):
         return JSONResponse(
             status_code=exc.status_code,
             content={"success": False, "message": exc.message},
@@ -67,6 +84,12 @@ def create_app(config_path: Path = Path("src/configs/logging_config.json")) -> F
         user_router,
         prefix="/user",
         tags=["User"],
+    )
+
+    app.include_router(
+        city_router,
+        prefix="/city",
+        tags=["City"],
     )
 
     return app

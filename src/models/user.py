@@ -1,3 +1,4 @@
+import logging
 from sqlalchemy import Column, func, event, PrimaryKeyConstraint
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.types import String, LargeBinary, DateTime
@@ -29,7 +30,7 @@ def create_admin():
     return DDL(
         f"""INSERT INTO public.user(id, email, hash_password)
                 VALUES
-                ('{serializing_data.id}', '{serializing_data.email}', '{serializing_data.hash_password}')
+                ('{serializing_data.id}', '{serializing_data.email}', '{str(serializing_data.hash_password)[2:-1]}')
                 ON CONFLICT DO NOTHING"""
     )
 
