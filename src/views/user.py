@@ -10,7 +10,7 @@ router = APIRouter()
 
 
 @router.post(
-    "/",
+    "",
     response_model=UserResponseSchema,
     status_code=201,
 )
@@ -22,7 +22,7 @@ def sign_user_endpoint(user: UserSchema, response: Response):
 
 
 @router.get(
-    "/",
+    "",
     response_model=UsersResponseSchema,
     status_code=200
 )
@@ -31,7 +31,7 @@ def get_users_endpoint():
 
 
 @router.get(
-    "/{_id}",
+    "{_id}",
     response_model=UserResponseSchema,
     status_code=200
 )
@@ -40,7 +40,7 @@ def get_user_endpoint(_id: uuid.UUID):
 
 
 @router.put(
-    "/", 
+    "", 
     response_model=UserResponseSchema,
     status_code=200
 )
@@ -49,7 +49,7 @@ async def update_user_endpoint(user: UserSchema):
 
 
 @router.delete(
-    "/{_id}",
+    "{_id}",
     response_model=UserResponseSchema,
     status_code=202
 )
