@@ -14,7 +14,7 @@ router = APIRouter()
     response_model=CityResponseSchema,
     status_code=201,
 )
-def create_city_endpoint(city: CitySchema, response: Response):
+def create_city_endpoint(city: CitySchema):
     return create(city)
 
 

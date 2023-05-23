@@ -21,6 +21,6 @@ class City(BaseModel):
         DateTime, server_default=func.now(), onupdate=datetime.datetime.now, nullable=False
     )
 
-    # project = relationship("Project", back_populates="city", uselist=True)
+    project = relationship("Project", back_populates="city", uselist=True)
 
     __table_args__ = (PrimaryKeyConstraint(id),)

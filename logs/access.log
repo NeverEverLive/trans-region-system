@@ -321,3 +321,46 @@ WHERE "user".id = :id_1
 2023-05-23 22:35:44 | INFO       | 127.0.0.1:49647 - "GET /city33e5da7c-c23b-4d6e-accd-974ea9bb4296 HTTP/1.1" 200
 2023-05-23 22:35:48 | INFO       | 127.0.0.1:49647 - "DELETE /city33e5da7c-c23b-4d6e-accd-974ea9bb4296 HTTP/1.1" 202
 2023-05-23 22:35:50 | INFO       | 127.0.0.1:49647 - "DELETE /city33e5da7c-c23b-4d6e-accd-974ea9bb4296 HTTP/1.1" 404
+2023-05-23 22:52:57 | INFO       | 127.0.0.1:53921 - "GET /docs HTTP/1.1" 200
+2023-05-23 22:52:57 | INFO       | 127.0.0.1:53921 - "GET /openapi.json HTTP/1.1" 200
+2023-05-23 22:53:19 | INFO       | 127.0.0.1:53924 - "GET /project HTTP/1.1" 400
+2023-05-23 22:53:53 | INFO       | 127.0.0.1:54168 - "GET /project HTTP/1.1" 200
+2023-05-23 22:54:01 | INFO       | 127.0.0.1:54198 - "GET /city HTTP/1.1" 200
+2023-05-23 22:54:13 | INFO       | 127.0.0.1:54251 - "POST /city HTTP/1.1" 201
+2023-05-23 22:54:18 | INFO       | 127.0.0.1:54278 - "GET /city HTTP/1.1" 200
+2023-05-23 22:55:37 | INFO       | 127.0.0.1:54598 - "POST /project HTTP/1.1" 201
+2023-05-23 22:55:50 | INFO       | 127.0.0.1:54656 - "GET /project HTTP/1.1" 200
+2023-05-23 22:56:08 | INFO       | 127.0.0.1:54726 - "GET /project3fa85f64-5717-4562-b3fc-2c963f66afa6 HTTP/1.1" 400
+2023-05-23 22:56:28 | INFO       | 127.0.0.1:54814 - "GET /project07b3e567-b6a6-4c30-a639-6fef5968158d HTTP/1.1" 200
+2023-05-23 23:06:16 | INFO       | 127.0.0.1:57237 - "GET /docs HTTP/1.1" 200
+2023-05-23 23:06:16 | INFO       | 127.0.0.1:57237 - "GET /openapi.json HTTP/1.1" 200
+2023-05-23 23:06:23 | INFO       | 127.0.0.1:57239 - "GET /project HTTP/1.1" 400
+2023-05-23 23:08:15 | INFO       | 127.0.0.1:57741 - "GET /project HTTP/1.1" 200
+2023-05-23 23:08:34 | INFO       | 127.0.0.1:57823 - "GET /city HTTP/1.1" 200
+2023-05-23 23:09:24 | INFO       | 127.0.0.1:58031 - "POST /project HTTP/1.1" 422
+2023-05-23 23:11:57 | INFO       | 127.0.0.1:58670 - "POST /project HTTP/1.1" 422
+2023-05-23 23:13:36 | INFO       | 127.0.0.1:59158 - "DELETE /project HTTP/1.1" 405
+2023-05-23 23:13:40 | INFO       | 127.0.0.1:59158 - "POST /project HTTP/1.1" 422
+2023-05-23 23:15:17 | INFO       | 127.0.0.1:59578 - "POST /project HTTP/1.1" 422
+2023-05-23 23:18:54 | WARNING    | id=UUID('0ba66d2b-c2aa-45a4-a3d4-db54bb4c16a8') city_id=UUID('64b3357d-95b6-4044-937f-a746eb7dd44b') name='The best home' price=1000000 description='Real best home' preview=None
+2023-05-23 23:18:54 | INFO       | 127.0.0.1:60520 - "POST /project HTTP/1.1" 400
+2023-05-23 23:20:34 | WARNING    | id=UUID('4d31b5ed-69ba-4935-b923-082597e3c74e') city_id=UUID('64b3357d-95b6-4044-937f-a746eb7dd44b') name='The best home' price=1000000 description='Real best home' preview=None
+2023-05-23 23:20:34 | INFO       | 127.0.0.1:60917 - "POST /project HTTP/1.1" 400
+2023-05-23 23:22:01 | INFO       | 127.0.0.1:61265 - "GET /project HTTP/1.1" 200
+2023-05-23 23:22:02 | INFO       | 127.0.0.1:61265 - "GET /project HTTP/1.1" 200
+2023-05-23 23:23:22 | INFO       | 127.0.0.1:61594 - "POST /project HTTP/1.1" 400
+2023-05-23 23:23:46 | INFO       | 127.0.0.1:61697 - "POST /project HTTP/1.1" 400
+2023-05-23 23:24:17 | INFO       | 127.0.0.1:61825 - "POST /project HTTP/1.1" 400
+2023-05-23 23:25:09 | WARNING    | /Users/nel/Documents/diplomas/trans_region_system/images/image_2023-05-15_14-18-09.png
+2023-05-23 23:25:09 | INFO       | 127.0.0.1:62037 - "POST /project HTTP/1.1" 400
+2023-05-23 23:26:30 | WARNING    | <src.models.project.Project object at 0x104898be0>
+2023-05-23 23:26:30 | INFO       | 127.0.0.1:62359 - "POST /project HTTP/1.1" 201
+2023-05-23 23:27:08 | INFO       | 127.0.0.1:62519 - "GET /project HTTP/1.1" 200
+2023-05-23 23:31:34 | INFO       | 127.0.0.1:63614 - "GET /docs HTTP/1.1" 200
+2023-05-23 23:31:35 | INFO       | 127.0.0.1:63614 - "GET /openapi.json HTTP/1.1" 200
+2023-05-23 23:31:40 | INFO       | 127.0.0.1:63616 - "GET /docs HTTP/1.1" 200
+2023-05-23 23:31:40 | INFO       | 127.0.0.1:63616 - "GET /openapi.json HTTP/1.1" 200
+2023-05-23 23:32:08 | INFO       | 127.0.0.1:63761 - "GET /docs HTTP/1.1" 200
+2023-05-23 23:32:08 | INFO       | 127.0.0.1:63761 - "GET /openapi.json HTTP/1.1" 200
+2023-05-23 23:32:16 | INFO       | 127.0.0.1:63763 - "GET /project/preview?path=%2FUsers%2Fnel%2FDocuments%2Fdiplomas%2Ftrans_region_system%2Fimages%2Fimage_2023-05-15_14-18-09.png HTTP/1.1" 200
+2023-05-23 23:37:12 | INFO       | 127.0.0.1:65012 - "GET /project HTTP/1.1" 200
