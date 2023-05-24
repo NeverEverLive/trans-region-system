@@ -27,7 +27,6 @@ class Project(BaseModel):
     )
 
     city = relationship("City", back_populates="project", uselist=False)
-    images = relationship("ImageProject", back_populates="project", uselist=True)
 
     __table_args__ = (
         PrimaryKeyConstraint(id),

@@ -7,7 +7,7 @@ from pydantic import BaseModel, Field
 from src.schemas.base_response import BaseResponse
 
 
-class ProjectSchema(BaseModel):
+class ProjectCreateSchema(BaseModel):
     class Config:
         allow_population_by_field_name = True
         alias_generator = stringcase.camelcase
@@ -19,7 +19,6 @@ class ProjectSchema(BaseModel):
     price: int
     description: str | None
     preview: str | None
-    images: list[str] | None
 
     @classmethod
     def __get_validators__(cls):
@@ -32,9 +31,22 @@ class ProjectSchema(BaseModel):
         return value
 
 
+class ProjectGetSchema(BaseModel):
+    class Config:
+        allow_population_by_field_name = True
+        alias_generator = stringcase.camelcase
+        orm_mode = True
+
+    id: uuid.UUID = Field(default_factory=uuid.uuid4)
+    name: str
+    price: int
+    description: str | None
+    preview: str | None
+    city_name: str | None
+
 class ProjectResponseSchema(BaseResponse):
-    data: ProjectSchema
+    data: ProjectGetSchema
 
 
 class ProjectsResponseSchema(BaseResponse):
-    data: list[ProjectSchema]
+    data: list[ProjectGetSchema]

@@ -3,7 +3,8 @@ import uuid
 
 from fastapi import APIRouter, UploadFile, Body
 
-from src.schemas.project import ProjectResponseSchema, ProjectSchema, ProjectsResponseSchema
+from src.schemas.project import ProjectResponseSchema, ProjectCreateSchema, ProjectsResponseSchema
+from src.schemas.filter import FilterSchema
 from src.pipelines.project import create, update, get_all, get, delete, get_image
 
 
@@ -16,20 +17,19 @@ router = APIRouter()
     status_code=201,
 )
 async def create_project_endpoint(
-    project: ProjectSchema = Body(), 
+    project: ProjectCreateSchema = Body(), 
     preview: UploadFile | None = None,
-    images: list[UploadFile] | None = None,
 ):
-    return await create(project, preview, images)
+    return await create(project, preview)
 
 
-@router.get(
-    "",
+@router.post(
+    "/filter",
     response_model=ProjectsResponseSchema,
     status_code=200
 )
-def get_cities_endpoint():
-    return get_all()
+async def get_cities_endpoint(filters: FilterSchema):
+    return get_all(filters)
 
 
 @router.get(
@@ -56,12 +56,11 @@ def get_project_image_endpoint(path: str):
     status_code=200
 )
 async def update_project_endpoint(
-    project: ProjectSchema, 
+    project: ProjectCreateSchema, 
     preview: UploadFile | None = None,
-    images: list[UploadFile] | None = None,
 
 ):
-    return await update(project, preview, images)
+    return await update(project, preview)
 
 
 @router.delete(

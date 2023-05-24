@@ -4,48 +4,73 @@ from pathlib import Path
 
 from fastapi import UploadFile
 from fastapi.responses import FileResponse
-from sqlalchemy import select, delete as sql_delete
+from sqlalchemy import select, delete as sql_delete, or_, func
 from pydantic import parse_obj_as
 
 from src.exceptions.project import ProjectException, ProjectDeleteException
 from src.models.base import get_session
 from src.models.project import Project
-from src.models.image_project import ImageProject
-from src.schemas.project import ProjectSchema, ProjectResponseSchema, ProjectsResponseSchema
-from src.schemas.image_project import ImageProjectSchema
+from src.models.city import City
+from src.schemas.filter import FilterSchema
+from src.schemas.project import ProjectCreateSchema, ProjectResponseSchema, ProjectsResponseSchema, ProjectGetSchema
 from src.settings import image_settings
 
 
-async def create(project: ProjectSchema, preview: UploadFile, images: list[UploadFile]):
+async def create(project: ProjectCreateSchema, preview: UploadFile):
     if preview:
         await upload_preview(preview)
         project.preview = image_settings.get_url(preview.filename)
 
-    images_queries = []
-    if images:
-        images_queries = await upload_images(project, images)
-
+    logging.warning(project.dict())
     project_state = Project().fill(**project.dict())
 
     with get_session() as session:
         session.add(project_state)
-        for query in images_queries:
-            session.add(query)
         session.commit()
 
         return ProjectResponseSchema(
-            data=ProjectSchema.from_orm(project_state), 
+            data=ProjectCreateSchema.from_orm(project),
             message="Project created", 
             success=True
         )
 
 
-def get_all():
-    return ProjectsResponseSchema(
-        data=parse_obj_as(list[ProjectSchema], Project.all()),
-        message="Cities accessed",
-        success=True
+def get_all(filters: FilterSchema):
+    query = select(
+        Project.id,
+        Project.name,
+        Project.preview,
+        Project.price,
+        City.name.label("city_name"),
+    ).join(
+        City,
+        City.id == Project.city_id
     )
+
+    if filters:
+        if filters.text:
+            query = query.where(
+                or_(
+                    func.lower(Project.name).ilike(f"{filters.text.lower()}%"),
+                    func.lower(City.name).ilike(f"{filters.text.lower()}%"),
+                )
+            )
+
+        if filters.sort:
+            query = query.order_by(
+                Project.inserted_at.desc()
+            )
+        else:
+            query = query.order_by(
+                Project.inserted_at.asc()
+            )
+
+    with get_session() as session:
+        return ProjectsResponseSchema(
+            data=parse_obj_as(list[ProjectGetSchema], session.execute(query).fetchall()),
+            message="Project accessed",
+            success=True
+        ).dict()
 
 
 def get(_id: uuid.UUID):
@@ -70,11 +95,8 @@ def get(_id: uuid.UUID):
             images.append(image.path)
     project.images = []
 
-
-    logging.warning({**ProjectSchema.from_orm(project).dict(exclude={"images"}), "images": images})
-
     return ProjectResponseSchema(
-        data={**ProjectSchema.from_orm(project).dict(), "images": images},
+        data={**ProjectGetSchema.from_orm(project).dict(), "images": images},
         message="Project accessed",
         success=True
     )
@@ -91,54 +113,25 @@ def get_image(path: str):
 
 
 async def upload_preview(preview: UploadFile):
-    with open(image_settings.get_url(preview.filename), "wb") as image:
+    with open(image_settings.get_file_location(preview.filename), "wb") as image:
         image.write(await preview.read())
 
 
-async def upload_images(project: ProjectSchema, images: list[UploadFile]):
-    with get_session() as session:
-        query = sql_delete(
-            ImageProject
-        ).where(
-            ImageProject.project_id == project.id
-        )
-
-        queries = []
-        for image in images:
-            queries.append(ImageProject().fill(**ImageProjectSchema.parse_obj({
-                "project_id": project.id,
-                "path": image_settings.get_url(image.filename),
-            }).dict()))
-            with open(image_settings.get_url(image.filename), "wb") as file:
-                file.write(await image.read())
-
-        session.execute(query)
-        session.commit()
-
-    return queries
-
-
-async def update(project: ProjectSchema, preview: UploadFile, images: list[UploadFile]):
+async def update(project: ProjectCreateSchema, preview: UploadFile):
     logging.warning(preview)
 
     if preview:
         await upload_preview(preview)
         project.preview = image_settings.get_url(preview.filename)
 
-    images_queries = []
-    if images:
-        images_queries = await upload_images(project, images)
-
     project_state = Project().fill(**project.dict())
 
     with get_session() as session:
         session.merge(project_state)
-        for query in images_queries:
-            session.add(query)
         session.commit()
 
     return ProjectResponseSchema(
-        data=ProjectSchema.from_orm(project_state),
+        data=ProjectGetSchema.from_orm(project_state),
         message="Project updated",
         success=True
     )
@@ -158,11 +151,6 @@ async def delete(_id: uuid.UUID):
                 status_code=404,
                 message="Project not found"
             )
-
-        logging.warning(project)
-        _project = ProjectSchema.from_orm(project)
-
-        await upload_images(_project, [])
 
         session.delete(project)
         session.commit()
