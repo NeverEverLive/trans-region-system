@@ -87,7 +87,7 @@ def get(_id: uuid.UUID):
             )
 
     return ProjectResponseSchema(
-        data={**ProjectSchema.from_orm(project).dict()},
+        data={**ProjectResSchema.from_orm(project).dict()},
         message="Project accessed",
         success=True
     )
