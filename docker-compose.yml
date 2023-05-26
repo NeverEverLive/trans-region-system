@@ -40,7 +40,7 @@ services:
       - ./postgres/init:/docker-entrypoint-initdb.d
     ports:
       - target: 5432
-        published: 5433
+        published: 15432
         mode: host
     command: postgres -c 'max_connections=500'
     healthcheck:
