@@ -33,7 +33,7 @@ async def get_cities_endpoint(filters: FilterSchema):
 
 
 @router.get(
-    "{_id}",
+    "/{_id}",
     response_model=ProjectResponseSchema,
     status_code=200
 )
@@ -64,7 +64,7 @@ async def update_project_endpoint(
 
 
 @router.delete(
-    "{_id}",
+    "/{_id}",
     response_model=ProjectResponseSchema,
     status_code=202
 )
