@@ -4,19 +4,18 @@ from pathlib import Path
 
 from fastapi import UploadFile
 from fastapi.responses import FileResponse
-from sqlalchemy import select, delete as sql_delete, or_, func
+from sqlalchemy import select,  or_, func
 from pydantic import parse_obj_as
 
 from src.exceptions.project import ProjectException, ProjectDeleteException
 from src.models.base import get_session
 from src.models.project import Project
-from src.models.city import City
 from src.schemas.filter import FilterSchema
-from src.schemas.project import ProjectCreateSchema, ProjectResponseSchema, ProjectsResponseSchema, ProjectGetSchema
+from src.schemas.project import ProjectSchema, ProjectResponseSchema, ProjectsResponseSchema
 from src.settings import image_settings
 
 
-async def create(project: ProjectCreateSchema, preview: UploadFile):
+async def create(project: ProjectSchema, preview: UploadFile):
     if preview:
         await upload_preview(preview)
         project.preview = image_settings.get_url(preview.filename)
@@ -29,7 +28,7 @@ async def create(project: ProjectCreateSchema, preview: UploadFile):
         session.commit()
 
         return ProjectResponseSchema(
-            data=ProjectCreateSchema.from_orm(project),
+            data=ProjectSchema.from_orm(project),
             message="Project created", 
             success=True
         )
@@ -41,10 +40,7 @@ def get_all(filters: FilterSchema):
         Project.name,
         Project.preview,
         Project.price,
-        City.name.label("city_name"),
-    ).join(
-        City,
-        City.id == Project.city_id
+        Project.city_name,
     )
 
     if filters:
@@ -52,7 +48,7 @@ def get_all(filters: FilterSchema):
             query = query.where(
                 or_(
                     func.lower(Project.name).ilike(f"{filters.text.lower()}%"),
-                    func.lower(City.name).ilike(f"{filters.text.lower()}%"),
+                    func.lower(Project.city_name).ilike(f"{filters.text.lower()}%"),
                 )
             )
 
@@ -67,7 +63,7 @@ def get_all(filters: FilterSchema):
 
     with get_session() as session:
         return ProjectsResponseSchema(
-            data=parse_obj_as(list[ProjectGetSchema], session.execute(query).fetchall()),
+            data=parse_obj_as(list[ProjectSchema], session.execute(query).fetchall()),
             message="Project accessed",
             success=True
         ).dict()
@@ -89,14 +85,8 @@ def get(_id: uuid.UUID):
                 message="Project not found"
             )
 
-        images = []
-        for image in project.images:
-            logging.warning(image.path)
-            images.append(image.path)
-    project.images = []
-
     return ProjectResponseSchema(
-        data={**ProjectGetSchema.from_orm(project).dict(), "images": images},
+        data={**ProjectSchema.from_orm(project).dict()},
         message="Project accessed",
         success=True
     )
@@ -117,7 +107,7 @@ async def upload_preview(preview: UploadFile):
         image.write(await preview.read())
 
 
-async def update(project: ProjectCreateSchema, preview: UploadFile):
+async def update(project: ProjectSchema, preview: UploadFile):
     logging.warning(preview)
 
     if preview:
@@ -131,7 +121,7 @@ async def update(project: ProjectCreateSchema, preview: UploadFile):
         session.commit()
 
     return ProjectResponseSchema(
-        data=ProjectGetSchema.from_orm(project_state),
+        data=ProjectSchema.from_orm(project_state),
         message="Project updated",
         success=True
     )

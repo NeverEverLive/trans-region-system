@@ -7,14 +7,14 @@ from pydantic import BaseModel, Field
 from src.schemas.base_response import BaseResponse
 
 
-class ProjectCreateSchema(BaseModel):
+class ProjectSchema(BaseModel):
     class Config:
         allow_population_by_field_name = True
         alias_generator = stringcase.camelcase
         orm_mode = True
 
     id: uuid.UUID = Field(default_factory=uuid.uuid4)
-    city_id: uuid.UUID
+    city_name: str
     name: str
     price: int
     description: str | None
@@ -31,7 +31,7 @@ class ProjectCreateSchema(BaseModel):
         return value
 
 
-class ProjectGetSchema(BaseModel):
+class ProjectResSchema(BaseModel):
     class Config:
         allow_population_by_field_name = True
         alias_generator = stringcase.camelcase
@@ -45,8 +45,8 @@ class ProjectGetSchema(BaseModel):
     city_name: str | None
 
 class ProjectResponseSchema(BaseResponse):
-    data: ProjectGetSchema
+    data: ProjectResSchema
 
 
 class ProjectsResponseSchema(BaseResponse):
-    data: list[ProjectGetSchema]
+    data: list[ProjectResSchema]

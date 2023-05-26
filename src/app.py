@@ -12,9 +12,7 @@ from src.utils.logger import CustomizeLogger
 from src.exceptions.user import UserException
 from src.exceptions.project import ProjectException
 from src.exceptions.authentication import AuthenticationException
-from src.exceptions.city import CityException
 from src.views.user import router as user_router
-from src.views.city import router as city_router
 from src.views.project import router as project_router
 
 
@@ -45,14 +43,7 @@ def create_app(config_path: Path = Path("src/configs/logging_config.json")) -> F
             status_code=exc.status_code,
             content={"success": False, "message": exc.message},
         )
-    
-    @app.exception_handler(CityException)
-    async def city_exception_handler(request: Request, exc: CityException):
-        return JSONResponse(
-            status_code=exc.status_code,
-            content={"success": False, "message": exc.message},
-        )
-    
+
     @app.exception_handler(ProjectException)
     async def project_exception_handler(request: Request, exc: ProjectException):
         return JSONResponse(
@@ -93,12 +84,6 @@ def create_app(config_path: Path = Path("src/configs/logging_config.json")) -> F
         user_router,
         prefix="/user",
         tags=["User"],
-    )
-
-    app.include_router(
-        city_router,
-        prefix="/city",
-        tags=["City"],
     )
 
     app.include_router(
