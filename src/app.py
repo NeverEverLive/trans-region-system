@@ -14,6 +14,7 @@ from src.exceptions.project import ProjectException
 from src.exceptions.authentication import AuthenticationException
 from src.views.user import router as user_router
 from src.views.project import router as project_router
+from src.views.view import router as view_router
 
 
 def create_app(config_path: Path = Path("src/configs/logging_config.json")) -> FastAPI:
@@ -90,6 +91,11 @@ def create_app(config_path: Path = Path("src/configs/logging_config.json")) -> F
         project_router,
         prefix="/project",
         tags=["Project"],
+    )
+
+    app.include_router(
+        view_router,
+        tags=["Utils"],
     )
 
     return app

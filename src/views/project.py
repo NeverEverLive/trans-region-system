@@ -1,11 +1,10 @@
-import logging
 import uuid
 
 from fastapi import APIRouter, UploadFile, Body
 
 from src.schemas.project import ProjectResponseSchema, ProjectsResponseSchema, ProjectSchema
 from src.schemas.filter import FilterSchema
-from src.pipelines.project import create, update, get_all, get, delete, get_image
+from src.pipelines.project import create, update, get_all, get, delete
 
 
 router = APIRouter()
@@ -39,15 +38,6 @@ async def get_cities_endpoint(filters: FilterSchema):
 )
 def get_project_endpoint(_id: uuid.UUID):
     return get(_id)
-
-
-@router.get(
-    "/image",
-    response_model=ProjectResponseSchema,
-    status_code=200
-)
-def get_project_image_endpoint(path: str):
-    return get_image(path)
 
 
 @router.put(
