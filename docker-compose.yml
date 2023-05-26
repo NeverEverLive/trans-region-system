@@ -9,6 +9,7 @@ services:
     volumes:
       - ./logs:/app/logs
       - ./configs:/app/configs:ro
+      - ./images:/app/images
     ports:
       - target: 8000
         published: 8000
