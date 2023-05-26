@@ -8,7 +8,7 @@ class ImageSettings(BaseSettings):
         return f'{self.bucket_path}/images/{file_name}'
 
     def get_url(self, file_name: str):
-        return f'http://192.168.10.189:8000/project/image?path={self.bucket_path}/images/{file_name}'
+        return f'http://localhost:8000/project/image?path={self.bucket_path}/images/{file_name}'
 
     class Config:
         env_file = ".env"

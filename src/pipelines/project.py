@@ -11,24 +11,25 @@ from src.exceptions.project import ProjectException, ProjectDeleteException
 from src.models.base import get_session
 from src.models.project import Project
 from src.schemas.filter import FilterSchema
-from src.schemas.project import ProjectSchema, ProjectResponseSchema, ProjectsResponseSchema
+from src.schemas.project import ProjectSchema, ProjectResponseSchema, ProjectsResponseSchema, ProjectResSchema
 from src.settings import image_settings
 
 
 async def create(project: ProjectSchema, preview: UploadFile):
+    preview_path = None
     if preview:
         await upload_preview(preview)
-        project.preview = image_settings.get_url(preview.filename)
+        preview_path = image_settings.get_url(preview.filename)
 
-    logging.warning(project.dict())
-    project_state = Project().fill(**project.dict())
+    project_state = Project().fill(**project.dict(), preview=preview_path)
 
     with get_session() as session:
         session.add(project_state)
         session.commit()
-
+        project = ProjectResSchema.from_orm(project)
+        project.preview = preview_path
         return ProjectResponseSchema(
-            data=ProjectSchema.from_orm(project),
+            data=project,
             message="Project created", 
             success=True
         )
@@ -108,23 +109,24 @@ async def upload_preview(preview: UploadFile):
 
 
 async def update(project: ProjectSchema, preview: UploadFile):
-    logging.warning(preview)
+    preview_path = None
 
     if preview:
         await upload_preview(preview)
-        project.preview = image_settings.get_url(preview.filename)
+        preview_path = image_settings.get_url(preview.filename)
 
-    project_state = Project().fill(**project.dict())
+    project_state = Project().fill(**project.dict(), preview=preview_path)
 
     with get_session() as session:
         session.merge(project_state)
         session.commit()
-
-    return ProjectResponseSchema(
-        data=ProjectSchema.from_orm(project_state),
-        message="Project updated",
-        success=True
-    )
+        project = ProjectResSchema.from_orm(project)
+        project.preview = preview_path
+        return ProjectResponseSchema(
+            data=project,
+            message="Project updated", 
+            success=True
+        )
 
 
 async def delete(_id: uuid.UUID):
