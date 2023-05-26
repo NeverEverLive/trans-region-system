@@ -1,43 +1,54 @@
+import logging
 import uuid
 import bcrypt
 
 from sqlalchemy import select
 from pydantic import parse_obj_as
 
-from src.exceptions.user import UserDeleteException, UserException
+from src.exceptions.user import UserDeleteException, UserException, UserCreateException
+from src.exceptions.authentication import AuthenticationException
 from src.models.base import get_session
 from src.models.user import UserModel
 from src.authorization.jwt_handler import encode_jwt_token
-from src.schemas.user import UserSchema, UserResponseSchema, UsersResponseSchema, UserSecure
+from src.schemas.user import UserSchema, UserResponseSchema, UsersResponseSchema, UserSecure, UserLoginSchema
 
 
-def sign_user(user: UserSchema) -> UserResponseSchema:
+def sign_in(user: UserLoginSchema):
     query = select(
         UserModel
     ).where(
-        UserModel.email == user.email,
-        UserModel.hash_password == user.hash_password,
+        UserModel.email == user.email
     ).limit(1)
 
     with get_session() as session:
         user_state = session.execute(query).scalar()
 
-    token = encode_jwt_token(user.id)
-    if user_state:
-        if not bcrypt.checkpw(user.hash_password, user_state.hash_password):
-            raise ValueError("Неверный пароль")
+    if not user_state:
+        raise AuthenticationException(status_code=400, message="Неверная почта")
 
+    if not bcrypt.checkpw(user.hash_password, user_state.hash_password):
+        raise AuthenticationException(status_code=400, message="Неверный пароль")
+
+    token = encode_jwt_token(user_state.id)
+
+    if user_state:
         return UserResponseSchema(
-            data=user,
+            data=user_state,
             success=True,
             message="You're successfully signed in"
         ), token
 
+
+def sign_up(user: UserSchema) -> UserResponseSchema:
     user_state = UserModel.fill(**user.dict())
+    token = encode_jwt_token(user.id)
 
     with get_session() as session:
         session.add(user_state)
-        session.commit()
+        try:
+            session.commit()
+        except Exception:
+            raise UserCreateException(status_code=400, message="User already exist")
     
     return UserResponseSchema(
         data=user,

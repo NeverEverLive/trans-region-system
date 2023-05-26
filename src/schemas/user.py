@@ -27,7 +27,7 @@ class UserSchema(BaseModel):
             raise ValueError("Пароль должен быть передан строкой.")
 
 
-class UserLogin(BaseModel):
+class UserLoginSchema(BaseModel):
     email: EmailStr
     hash_password: bytes = Field(alias="password")
 

@@ -2,20 +2,32 @@ import uuid
 
 from fastapi import APIRouter, Response
 
-from src.schemas.user import UserResponseSchema, UserSchema, UsersResponseSchema
-from src.pipelines.user import sign_user, get_users, get_user, update_user, delete_user
+from src.schemas.user import UserResponseSchema, UserSchema, UsersResponseSchema, UserLoginSchema
+from src.pipelines.user import sign_in, sign_up, get_users, get_user, update_user, delete_user
 
 
 router = APIRouter()
 
 
 @router.post(
-    "",
+    "/sign_in",
     response_model=UserResponseSchema,
     status_code=201,
 )
-def sign_user_endpoint(user: UserSchema, response: Response):
-    user, token = sign_user(user)
+def sign_in_user_endpoint(user: UserLoginSchema, response: Response):
+    user, token = sign_in(user)
+    response.headers["Authorization"] = token
+    response.headers["Access-Control-Expose-Headers"] = "*"
+    return user
+
+
+@router.post(
+    "/sign_up",
+    response_model=UserResponseSchema,
+    status_code=201,
+)
+def sign_in_user_endpoint(user: UserSchema, response: Response):
+    user, token = sign_up(user)
     response.headers["Authorization"] = token
     response.headers["Access-Control-Expose-Headers"] = "*"
     return user
