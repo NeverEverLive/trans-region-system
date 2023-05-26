@@ -15,7 +15,7 @@ def sign_user(user: UserSchema) -> UserResponseSchema:
     query = select(
         UserModel
     ).where(
-        UserModel.id == user.id
+        UserModel.email == user.email
     ).limit(1)
 
     with get_session() as session:
