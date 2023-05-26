@@ -26,7 +26,7 @@ def sign_in_user_endpoint(user: UserLoginSchema, response: Response):
     response_model=UserResponseSchema,
     status_code=201,
 )
-def sign_in_user_endpoint(user: UserSchema, response: Response):
+def sign_up_user_endpoint(user: UserSchema, response: Response):
     user, token = sign_up(user)
     response.headers["Authorization"] = token
     response.headers["Access-Control-Expose-Headers"] = "*"
