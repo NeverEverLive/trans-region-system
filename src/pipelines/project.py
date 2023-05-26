@@ -95,7 +95,7 @@ def get(_id: uuid.UUID):
 
 def get_image(path: str):
     response = FileResponse(
-        path=Path("preview_smb", path.replace("%", "/")),
+        path=Path(path.replace("%", "/")),
         media_type="image/webp",
         filename=path.split("/")[-1],
     )
