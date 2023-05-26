@@ -1,7 +1,7 @@
 import uuid
-import logging
+import bcrypt
 
-from sqlalchemy import select, update, delete
+from sqlalchemy import select
 from pydantic import parse_obj_as
 
 from src.exceptions.user import UserDeleteException, UserException
@@ -15,7 +15,8 @@ def sign_user(user: UserSchema) -> UserResponseSchema:
     query = select(
         UserModel
     ).where(
-        UserModel.email == user.email
+        UserModel.email == user.email,
+        UserModel.hash_password == user.hash_password,
     ).limit(1)
 
     with get_session() as session:
@@ -23,6 +24,9 @@ def sign_user(user: UserSchema) -> UserResponseSchema:
 
     token = encode_jwt_token(user.id)
     if user_state:
+        if not bcrypt.checkpw(user.hash_password, user_state.hash_password):
+            raise ValueError("Неверный пароль")
+
         return UserResponseSchema(
             data=user,
             success=True,
