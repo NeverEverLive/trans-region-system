@@ -16,6 +16,15 @@ from src.settings import image_settings
 
 
 async def create(project: ProjectSchema, preview: UploadFile):
+    """
+        Описание:
+            Создать проект
+        Входные параметры:
+            :project: ProjectSchema - данные проекта
+            :preview: UploadFile - превью для проекта
+        Возвращаемые параметры:
+            Созданный проект типа ProjectResponseSchema
+    """
     preview_path = None
     if preview:
         await upload_preview(preview)
@@ -36,6 +45,14 @@ async def create(project: ProjectSchema, preview: UploadFile):
 
 
 def get_all(filters: FilterSchema):
+    """
+        Описание:
+            Получить все проекты
+        Входные параметры:
+            :filters: FilterSchema - Фильтры применяемы к списку
+        Возвращаемые параметры:
+            Список проектов типа ProjectsResponseSchema
+    """
     query = select(
         Project.id,
         Project.name,
@@ -45,6 +62,7 @@ def get_all(filters: FilterSchema):
     )
 
     if filters:
+        # Фильтрация по тексту
         if filters.text:
             query = query.where(
                 or_(
@@ -52,7 +70,7 @@ def get_all(filters: FilterSchema):
                     func.lower(Project.city_name).ilike(f"{filters.text.lower()}%"),
                 )
             )
-
+        # Сортировка проектов по дате
         if filters.sort:
             query = query.order_by(
                 Project.inserted_at.desc()
@@ -71,6 +89,14 @@ def get_all(filters: FilterSchema):
 
 
 def get(_id: uuid.UUID):
+    """
+        Описание:
+            Получить один проект
+        Входные параметры:
+            :_id: uuid.UUID - id получаемого проекта
+        Возвращаемые параметры:
+            Объект проекта типа ProjectResponseSchema
+    """
     query = select(
         Project
     ).where(
@@ -94,6 +120,14 @@ def get(_id: uuid.UUID):
 
 
 def get_image(path: str):
+    """
+        Описание:
+            Получить изображение
+        Входные параметры:
+            :path: str - путь до картинки
+        Возвращаемые параметры:
+            Изображение типа FileResponse
+    """
     response = FileResponse(
         path=Path(path.replace("%", "/")),
         media_type="image/webp",
@@ -104,11 +138,28 @@ def get_image(path: str):
 
 
 async def upload_preview(preview: UploadFile):
+    """
+        Описание:
+            Загрузить превью
+        Входные параметры:
+            :preview: UploadFile - загружаемое превью
+        Возвращаемые параметры:
+            None
+    """
     with open(image_settings.get_file_location(preview.filename), "wb") as image:
         image.write(await preview.read())
 
 
 async def update(project: ProjectSchema, preview: UploadFile):
+    """
+        Описание:
+            Обновить проект
+        Входные параметры:
+            :project: ProjectSchema - данные проекта
+            :preview: UploadFile - превью для проекта
+        Возвращаемые параметры:
+            Обновленный проект типа ProjectResponseSchema
+    """
     preview_path = None
 
     if preview:
@@ -130,6 +181,14 @@ async def update(project: ProjectSchema, preview: UploadFile):
 
 
 async def delete(_id: uuid.UUID):
+    """
+        Описание:
+            Удалить проект
+        Входные параметры:
+            :_id: uuid.UUID - id удаляемого проекта
+        Возвращаемые параметры:
+            Удаленный проекта типа ProjectResponseSchema
+    """
     query = select(
         Project
     ).where(

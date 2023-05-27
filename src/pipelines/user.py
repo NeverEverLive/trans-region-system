@@ -14,6 +14,15 @@ from src.schemas.user import UserSchema, UserResponseSchema, UsersResponseSchema
 
 
 def sign_in(user: UserLoginSchema):
+    """
+        Описание:
+            Авторизовать пользователя
+        Входные параметры:
+            :user: UserLoginSchema - Данные пользователя для авторизации
+        Возвращаемые параметры:
+            :user_state: - Объект пользователя типа UserResponseSchema
+            :token: - JWT токен для авторизации
+    """
     query = select(
         UserModel
     ).where(
@@ -40,6 +49,15 @@ def sign_in(user: UserLoginSchema):
 
 
 def sign_up(user: UserSchema) -> UserResponseSchema:
+    """
+        Описание:
+            Зарегистрировать пользователя
+        Входные параметры:
+            :user: UserLoginSchema - Данные пользователя для регистрации
+        Возвращаемые параметры:
+            :user_state: - Объект пользователя типа UserResponseSchema
+            :token: - JWT токен для авторизации
+    """
     user_state = UserModel.fill(**user.dict())
     token = encode_jwt_token(user.id)
 
@@ -57,7 +75,15 @@ def sign_up(user: UserSchema) -> UserResponseSchema:
     ), token
 
 
-def get_users() -> UserResponseSchema:
+def get_users() -> UsersResponseSchema:
+    """
+        Описание:
+            Получить пользователей
+        Входные параметры:
+            None
+        Возвращаемые параметры:
+            Список пользователей типа UsersResponseSchema
+    """
     return UsersResponseSchema(
         data=parse_obj_as(list[UserSecure], UserModel.all()),
         message="User accessed",
@@ -65,6 +91,14 @@ def get_users() -> UserResponseSchema:
     )
 
 def get_user(_id: uuid.UUID) -> UserResponseSchema:
+    """
+        Описание:
+            Получить пользователя
+        Входные параметры:
+            :_id: uuid.UUID - id получаемого пользователя
+        Возвращаемые параметры:
+            Список пользователи типа Users
+    """
     query = select(
         UserModel
     ).where(
@@ -89,12 +123,13 @@ def get_user(_id: uuid.UUID) -> UserResponseSchema:
 
 def update_user(user_data) -> UserResponseSchema:
     """
-    Изменить пользователя
+    Описание:
+        Изменить пользователя
     Входные параметры:
-    :params user: Данные пользователя
+        :params user: Данные пользователя
 
     Исходящие данные:
-    Словарь с результатами обновления пользователя
+        Словарь с результатами обновления пользователя
     """
 
     user_state = UserModel().fill(**user_data.dict())
@@ -108,12 +143,13 @@ def update_user(user_data) -> UserResponseSchema:
 
 def delete_user(_id) -> UserResponseSchema:
     """
-    Удалить пользователя
+    Описание:
+        Удалить пользователя
     Входные параметры:
-    :params user: Данные пользователя
+        :params user: Данные пользователя
 
     Исходящие данные:
-    Словарь с результатами удаления пользователя
+        Словарь с результатами удаления пользователя
     """
     query = select(
         UserModel

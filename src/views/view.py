@@ -14,5 +14,5 @@ router = APIRouter()
     status_code=200
 )
 def get_project_image_endpoint(path: str):
-    logging.warning(path)
+    """Эндпоинт для получения картинки"""
     return get_image(path)

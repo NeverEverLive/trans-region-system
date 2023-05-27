@@ -3,6 +3,7 @@ from pydantic import Field
 
 
 class TokenAuthorization(BaseSettings):
+    """Настройки авторизации"""
     token_ttl: int = Field(env="TOKEN_TTL", default=30)
     algorithms: str = Field(env="ALGORITHMS", default="HS256")
     secret_key: str = Field(env="SECRET_KEY", default="bad_key")

@@ -8,6 +8,7 @@ from src.schemas.base_response import BaseResponse
 
 
 class UserSchema(BaseModel):
+    """Схема пользователя"""
     class Config:
         orm_mode = True
         validate_assignment = True
@@ -28,11 +29,13 @@ class UserSchema(BaseModel):
 
 
 class UserLoginSchema(BaseModel):
+    """Схема пользователя для авторизации"""
     email: EmailStr
     hash_password: bytes = Field(alias="password")
 
 
 class UserSecure(BaseModel):
+    """Защищенная схема пользователя"""
     id: uuid.UUID
     email: EmailStr
 
@@ -42,6 +45,7 @@ class UserSecure(BaseModel):
 
 
 class UserResponseSchema(BaseResponse):
+    """Схема ответа пользователя"""
     class Config:
         orm_mode = True
 
@@ -49,11 +53,5 @@ class UserResponseSchema(BaseResponse):
 
 
 class UsersResponseSchema(BaseResponse):
+    """Схема пользователей"""
     data: list[UserSecure]
-
-
-class UserID(BaseModel):
-    id: uuid.UUID
-
-    class Config:
-        orm_mode = True

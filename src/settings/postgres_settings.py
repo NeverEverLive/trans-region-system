@@ -2,6 +2,7 @@ from pydantic import BaseSettings, Field
 
 
 class PostgresSettings(BaseSettings):
+    """Настройки подключения к Postgres"""
     host: str = Field(env="PG_HOST", default="127.0.0.1")
     port: int = Field(env="PG_PORT", default=5432)
     username: str = Field(env="PG_USERNAME", default="postgres")

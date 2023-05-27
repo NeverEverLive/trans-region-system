@@ -9,6 +9,7 @@ from src.exceptions.authentication import TokenExpiredException
 
 
 class JWTBearer(HTTPBearer):
+    """Модуль для авторизации"""
     valid_schemas = ["Bearer"]
 
     def __init__(self, auto_error: bool = True):

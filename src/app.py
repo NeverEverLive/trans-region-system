@@ -18,11 +18,15 @@ from src.views.view import router as view_router
 
 
 def create_app(config_path: Path = Path("src/configs/logging_config.json")) -> FastAPI:
+    """Создание проекта"""
+    # Подключение логгера
     CustomizeLogger.make_logger(config_path)
 
+    # Создание проекта
     app = FastAPI(title="Prefab project", debug=False)
     app.secret_key = "BAD_SECRET_KEY"
 
+    # Подключение CORS для работы с фронтом
     app.add_middleware(
         CORSMiddleware,
         allow_origins = ["*"],
@@ -31,6 +35,7 @@ def create_app(config_path: Path = Path("src/configs/logging_config.json")) -> F
         allow_headers=["*"],
     )
 
+    # Обработчик ошибок
     @app.exception_handler(Exception)
     async def unicorn_exception_handler(request: Request, exc: Exception):
         return JSONResponse(
@@ -38,6 +43,7 @@ def create_app(config_path: Path = Path("src/configs/logging_config.json")) -> F
             content={"success": False, "message": str(exc)},
         )
 
+    # Обработчик ошибок пользователя
     @app.exception_handler(UserException)
     async def user_exception_handler(request: Request, exc: UserException):
         return JSONResponse(
@@ -45,6 +51,7 @@ def create_app(config_path: Path = Path("src/configs/logging_config.json")) -> F
             content={"success": False, "message": exc.message},
         )
 
+    # Обработчик ошибок проекта
     @app.exception_handler(ProjectException)
     async def project_exception_handler(request: Request, exc: ProjectException):
         return JSONResponse(
@@ -52,6 +59,7 @@ def create_app(config_path: Path = Path("src/configs/logging_config.json")) -> F
             content={"success": False, "message": exc.message},
         )
 
+    # Обработчик ошибок авторизации
     @app.exception_handler(AuthenticationException)
     async def authentication_exception_handler(request: Request, exc: AuthenticationException):
         return JSONResponse(
@@ -59,6 +67,7 @@ def create_app(config_path: Path = Path("src/configs/logging_config.json")) -> F
             content={"success": False, "message": exc.message},
         )
 
+    # Обработчик ошибок валидации
     @app.exception_handler(RequestValidationError)
     async def validation_exception_handler(request: Request, exc: RequestValidationError):
         return JSONResponse(
@@ -73,6 +82,7 @@ def create_app(config_path: Path = Path("src/configs/logging_config.json")) -> F
         description="Service health check request",
     )
     async def healthcheck_endpoint(response: Response):
+        """Эндпоинт проверки работоспособности проекта"""
         try:
             pass
         except Exception:
@@ -81,18 +91,21 @@ def create_app(config_path: Path = Path("src/configs/logging_config.json")) -> F
         else:
             return {"success": True}
 
+    # Подключение роутера пользователей
     app.include_router(
         user_router,
         prefix="/user",
         tags=["User"],
     )
 
+    # Подключение роутера проектов
     app.include_router(
         project_router,
         prefix="/project",
         tags=["Project"],
     )
 
+    # Подключение вспомогательного роутера
     app.include_router(
         view_router,
         tags=["Utils"],

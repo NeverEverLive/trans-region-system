@@ -2,6 +2,7 @@ from pydantic import BaseSettings, Field
 
 
 class ImageSettings(BaseSettings):
+    """Настройки изображения"""
     bucket_path: str = Field(env="BUCKET_PATH", default="127.0.0.1")
 
     def get_file_location(self, file_name: str):

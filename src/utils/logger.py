@@ -5,6 +5,7 @@ from pathlib import Path
 
 from loguru import logger
 
+# Настройки Логера
 
 class InterceptHandler(logging.Handler):
     loglevel_mapping = {

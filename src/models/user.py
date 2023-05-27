@@ -9,6 +9,7 @@ from src.schemas.user import UserSchema
 
 
 class UserModel(BaseModel):
+    """Таблица пользователя"""
     __tablename__ = "user"
 
     id = Column(UUID(as_uuid=True), nullable=False, unique=True)
@@ -19,6 +20,7 @@ class UserModel(BaseModel):
 
     __table_args__ = (PrimaryKeyConstraint(id),)
 
+# Скрипт создания админа если его нет, при запуске проекта
 def create_admin():
     """DDL при создании таблицы добавляет пользователя admin"""
     admin_user = {

@@ -8,6 +8,7 @@ from src.schemas.base_response import BaseResponse
 
 
 class ProjectSchema(BaseModel):
+    """Схема проекта"""
     class Config:
         allow_population_by_field_name = True
         alias_generator = stringcase.camelcase
@@ -31,6 +32,7 @@ class ProjectSchema(BaseModel):
 
 
 class ProjectResSchema(BaseModel):
+    """Схема возвращаемого проекта"""
     class Config:
         allow_population_by_field_name = True
         alias_generator = stringcase.camelcase
@@ -44,8 +46,10 @@ class ProjectResSchema(BaseModel):
     city_name: str | None
 
 class ProjectResponseSchema(BaseResponse):
+    """Схема ответа проекта"""
     data: ProjectResSchema
 
 
 class ProjectsResponseSchema(BaseResponse):
+    """Схема ответа проектов"""
     data: list[ProjectResSchema]

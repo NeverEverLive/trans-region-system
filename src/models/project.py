@@ -10,6 +10,7 @@ from src.models.base import BaseModel
 
 
 class Project(BaseModel):
+    """Таблица проекта"""
     # table name
     __tablename__ = "project"
 
